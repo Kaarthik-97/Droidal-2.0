@@ -1,4 +1,5 @@
 .button-container {
+    margin-top: 50px;
     display: flex;
     flex-wrap: wrap;
     gap: 16px;
@@ -11,14 +12,15 @@
     border-radius: 12px; /* Rounded corners */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08); /* Subtle shadow */
     border: 1px solid rgba(0, 0, 0, 0.1); /* Light border */
-    padding: 20px 30px;
+    width: 10vw;
+  
     text-align: center;
     font-family: "San Francisco", Arial, sans-serif; /* Apple-like font */
     font-size: 16px;
     font-weight: 600;
     color: #333333;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.1s ease;
   }
   
   .button-card:hover {

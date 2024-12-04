@@ -1,22 +1,32 @@
 const buttonProperties = {
     addNodeA: {
-      label: 'Add For',
+      label: 'For',
       nodeProps: {
         data: { label: 'For' },
         style: { backgroundColor: 'lightblue' },
       },
     },
     addNodeB: {
-      label: 'Add if',
+      label: 'If',
       nodeProps: {
         data: { label: 'if' },
         style: { backgroundColor: 'lightgreen' },
+        
       },
     },
     addNodeC: {
-      label: 'Add else',
+      label: 'Else',
       nodeProps: {
         data: { label: 'else' },
+        style: { backgroundColor: 'lightcoral' },
+      },
+      
+    },
+    addNodeD: {
+      label: 'While',
+      nodeProps: {
+        data: { label: 'While' },
+        type: 'bidirectional',
         style: { backgroundColor: 'lightcoral' },
       },
     },
