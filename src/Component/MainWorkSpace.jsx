@@ -16,6 +16,7 @@ import '@xyflow/react/dist/style.css';
 import SideBarProperties from './Sections/SideBarProperties';
 import TopButton from './Buttons/TopButton';
 import importFromJSON from './Sections/JsonImport';
+import BiDirectionalNode from './Sections/BiDirectionalNode.tsx';
  
 const MainWorkSpace = () => {
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
@@ -31,6 +32,11 @@ const MainWorkSpace = () => {
       ),
     []
   );
+
+
+  const nodeTypes = {
+    bidirectional: BiDirectionalNode,
+  };
  
   const addNode = (nodeProps) => {
     setNodes((nds) => [
@@ -42,8 +48,6 @@ const MainWorkSpace = () => {
       },
     ]);
   };
-
-
 
 
 
@@ -127,6 +131,7 @@ const MainWorkSpace = () => {
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
+        nodeTypes={nodeTypes}
         onPaneClick={onPaneClick}
         onEdgeClick={onEdgeClick}
         onNodeClick={onNodeDoubleClick}
@@ -156,7 +161,7 @@ const MainWorkSpace = () => {
         <SideBarProperties selectedNode = {selectedNode}/>
         </>): 
         (
-        <><TopButton nodes = {nodes} edges = {edges}/>
+        <><TopButton nodes = {nodes} setNodes = {setNodes} setEdges = {setEdges} seedges = {edges}/>
         <SideBarNew onAddNode = {addNode}/>
         </>)
 }

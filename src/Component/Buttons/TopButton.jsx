@@ -4,10 +4,11 @@ import {
     Controls,
   } from '@xyflow/react';
 import "./css/TopButton.css"
+import importFromJSON from "../Sections/JsonImport";
 
 
 
-const copyToClipboard = (nodes, edges) => {
+const copyToClipboard = (nodes, setNodes , setEdges, edges) => {
     const data = { nodes, edges }; // Combine nodes and edges into one object
     const jsonString = JSON.stringify(data, null, 2); // Serialize with formatting
     navigator.clipboard
@@ -20,7 +21,18 @@ const copyToClipboard = (nodes, edges) => {
       });
   };
 
-const TopButton =(nodes, edges)=>{
+
+  const handlePaste = async (setNodes, setEdges) => {
+    try {
+      const clipboardText = await navigator.clipboard.readText();
+      importFromJSON(clipboardText, setNodes, setEdges);
+    } catch (err) {
+      console.error('Failed to read clipboard contents: ', err);
+    }
+  };
+
+
+const TopButton =(nodes,setNodes,setEdges, edges)=>{
 return(
     <>
         <img
@@ -33,8 +45,12 @@ return(
       onClick={() => exportAsJSON(nodes, edges)}
       src="/download.png"
     />
-    
-    
+         <img
+      className="TopNavButtonPT"
+      onClick={() => handlePaste(setNodes, setEdges)}
+      src="/icons8-paste-50.png"
+    />
+
     </>
 )
 }
