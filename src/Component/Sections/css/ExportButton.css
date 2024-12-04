@@ -1,0 +1,22 @@
+/* styles.css */
+.ExportButton {
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px 10px; /* Adjust padding for better size */
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+  
+  /* Hover effect */
+  .ExportButton:hover {
+    background-color: #f0f0f0;
+    color: #333;
+  }
+  
+  /* Active effect */
+  .ExportButton:active {
+    background-color: #e0e0e0;
+    color: #222;
+  }
