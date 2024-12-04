@@ -36,3 +36,14 @@
     transform: rotate(360deg);
   }
 }
+
+.Properties {
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 20vw;
+  height: 100vh;
+  background-color: #f9f9f9; 
+  border-right: 1px solid #ccc;
+  overflow: auto;
+}
