@@ -10,7 +10,9 @@ const buttonProperties = {
       label: 'If',
       nodeProps: {
         data: { label: 'if' },
-        style: { backgroundColor: 'lightgreen' },
+        type:'tridirectional',
+        
+        style: { backgroundColor: 'lightgreen',border: '1px solid black',borderRadius: '8px' },
         
       },
     },
@@ -18,7 +20,7 @@ const buttonProperties = {
       label: 'Else',
       nodeProps: {
         data: { label: 'else' },
-        style: { backgroundColor: 'lightcoral' },
+        style: { backgroundColor: 'lightcoral',  fontSize: '14px',padding: '10px',  },
       },
       
     },
@@ -27,7 +29,7 @@ const buttonProperties = {
       nodeProps: {
         data: { label: 'While' },
         type: 'bidirectional',
-        style: { backgroundColor: 'lightcoral' },
+        style: {backgroundColor: 'lightcoral',border: '1px solid black',borderRadius: '8px'},
       },
     },
   };

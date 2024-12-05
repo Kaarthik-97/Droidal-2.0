@@ -17,6 +17,7 @@ import SideBarProperties from './Sections/SideBarProperties';
 import TopButton from './Buttons/TopButton';
 import importFromJSON from './Sections/JsonImport';
 import BiDirectionalNode from './Sections/BiDirectionalNode.tsx';
+import TriDirectionalNode from './Sections/TriDirectionalNode.tsx';
  
 const MainWorkSpace = () => {
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
@@ -36,6 +37,7 @@ const MainWorkSpace = () => {
 
   const nodeTypes = {
     bidirectional: BiDirectionalNode,
+    tridirectional:TriDirectionalNode,
   };
  
   const addNode = (nodeProps) => {

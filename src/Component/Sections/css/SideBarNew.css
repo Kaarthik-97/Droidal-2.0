@@ -1,5 +1,5 @@
 .button-container {
-    margin-top: 50px;
+    margin-top: 40px;
     display: flex;
     flex-wrap: wrap;
     gap: 16px;
@@ -22,13 +22,13 @@
     cursor: pointer;
     transition: all 0.1s ease;
   }
-  
+/*   
   .button-card:hover {
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.12); /* Slightly stronger shadow */
-    transform: translateY(-4px); /* Lift effect */
-    background: #f8f9fa; /* Slightly lighter background */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.12);
+    transform: translateY(-4px);
+    background: #f8f9fa;
   }
-  
+   */
   .button-card:active {
     transform: translateY(2px); /* Button presses down slightly */
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08); /* Reduced shadow */
