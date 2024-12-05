@@ -81,9 +81,8 @@ const MainWorkSpace = () => {
   }
 }
 
-
   const onEdgeClick = (event, edge) => {
-    setSelectedEdge(edge); 
+    setSelectedEdge(edge);
   };
 
 
@@ -131,7 +130,6 @@ const MainWorkSpace = () => {
 
 
   const deleteEdge = (edgeId) => {
-    // Filter out the edge by its id and update the edges state
     const newEdges = edges.filter((edge) => edge.id !== edgeId);
     setEdges(newEdges);
     setSelectedEdge(null); 
@@ -160,10 +158,6 @@ const MainWorkSpace = () => {
   };
 
 
-  // const test = () => {
-  //   console.log("sdgsdgsdg");
-  //   // Your logic to handle paste
-  // };
   
   return (
     <>

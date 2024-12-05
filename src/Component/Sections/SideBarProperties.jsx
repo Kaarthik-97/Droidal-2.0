@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import SelectInput from '../Buttons/SelectInput';
+import RadioInput from '../Buttons/RadioInput';
+import TextInput from '../Buttons/TextInput';
 
 const SideBarProperties = ({ selectedNode, updateNodeProperties }) => {
   // State to store the current properties of the selected node
   const [nodeData, setNodeData] = useState(selectedNode ? selectedNode.data : {});
+
+
+
 
   // Update local state if selectedNode changes
   useEffect(() => {
@@ -11,49 +17,113 @@ const SideBarProperties = ({ selectedNode, updateNodeProperties }) => {
     }
   }, [selectedNode]);
 
-  // Handle input changes to update the local state
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
+
+
+
+
+  // // Handle input changes to update the local state
+  // const handleInputChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setNodeData((prevData) => ({
+  //     ...prevData,
+  //     [name]: value,
+  //   }));
+
+  //   // Optionally, if you want to push updates back to parent or other parts of your app
+  //   if (updateNodeProperties) {
+  //     updateNodeProperties(selectedNode.id, name, value);
+  //   }
+  // };
+
+
+ 
+
+  const handleInputChange = (e, key) => {
+    const { value } = e.target;
+    
     setNodeData((prevData) => ({
       ...prevData,
-      [name]: value,
+      [key]: {
+        ...prevData[key],
+        selectedValue: value,
+      }
     }));
-
-    // Optionally, if you want to push updates back to parent or other parts of your app
+  
+    // Optionally, update the parent component
     if (updateNodeProperties) {
-      updateNodeProperties(selectedNode.id, name, value);
+      updateNodeProperties(selectedNode.id, key, value);
     }
   };
+  
+
+
+
+
 
   if (!selectedNode || !selectedNode) {
     return <div>No node selected</div>;
   }
 
+
+
+
+
   return (
     <div className="NodeProperties">
-      <div className="NodeTitle">
-        <h3>Node Properties</h3>
-        <p>{nodeData?.label || "No label"}</p>
-      </div>
       <div className="NodeBody">
-        <strong>ID:</strong> {selectedNode.id}
+        {Object.keys(nodeData).map((key) => {
+          const field = nodeData[key];
 
-        <div>
-          {Object.keys(nodeData).map((key) => (
+          return (
             <div key={key} className="PropertyRow">
               <label>{key}:</label>
-              <input
-                type="text"
-                name={key}
-                value={nodeData[key] || ""}
-                onChange={handleInputChange}
-              />
+
+              {/* Check for the type of the field and render accordingly */}
+              {field?.type === 'select' ? (
+                
+                <select
+                  name={key}
+                  value={field.value}
+                  onChange={(e) => handleInputChange(e, key)}
+                >
+                  {field?.options?.map((option, idx) => (
+                    <option key={idx} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
+              ) : field?.type === 'radio' ? (
+                <div>
+                  {field?.options?.map((option, idx) => (
+                    <label key={idx}>
+                      <input
+                        type="radio"
+                        name={key}
+                        value={option}
+                        checked={field.selectedValue === option}
+                        onChange={(e) => handleInputChange(e, key)}
+                      />
+                      {option}
+                    </label>
+                  ))}
+                </div>
+              ) : (
+                
+                <input
+                  type="text"
+                  name={key}
+                  value={field.selectedValue || ''}
+                  onChange={(e) => handleInputChange(e, key)}
+                />
+              )}
             </div>
-          ))}
-        </div>
+          );
+        })}
       </div>
     </div>
   );
-};
+}
+
+      
 
 export default SideBarProperties;

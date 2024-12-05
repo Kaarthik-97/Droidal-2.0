@@ -1,0 +1,16 @@
+{
+    "select_type": [
+      "String",
+      "Int",
+      "List",
+      "Dict",
+      "Float",
+      "Tuple",
+      "Boolean",
+      "Bytes",
+      "Set",
+      "Frozenset"
+    ]
+
+  }
+  

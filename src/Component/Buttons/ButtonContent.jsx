@@ -1,7 +1,7 @@
 const buttonContent = {
 
     OpenBrowser:{
-        "browsertype": "Chrome()",
+        "browsertype": {"value":"Chrome()","type":"select"},
         "Value": "https://metrolinadermatology.ema.md/ema/Login.action",
         "fullwidth": "full-width",
         "delay": "1",
