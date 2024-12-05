@@ -12,12 +12,12 @@ const TriDirectionalNode = ({ data }: NodeProps<BuiltInNode>) => {
   return (
     <div className='BiDirNode' style = {{
         fontSize: '14px',
-        padding: '10px 20px', 
+        padding: '20px 40px', 
         cursor: 'pointer', }}>
-      <Handle type="target" position={Position.Left} id="left" />
+      <Handle type="target" position={Position.Top} id="left"></Handle> 
       {data?.label}
-      <Handle type="source" position={Position.Right} id="right" />
-      <Handle type="source" position={Position.Bottom} id="bottom" />
+      <Handle type="source" position={Position.Right} id="right" ><div style={{ transform: 'rotate(270deg) translateY(15px) translateX(-5px)' }}>False</div></Handle>
+      <Handle type="source" position={Position.Bottom} id="bottom" ><div style={{ transform: 'translateX(-10px) translateY(10px)' }}>True</div></Handle> 
     </div>
   );
 };

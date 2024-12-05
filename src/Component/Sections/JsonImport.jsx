@@ -1,18 +1,35 @@
+const importFromJSON = (clipboardText,{setNodes, setEdges}) => {
+  try {
+    const clipboardData = JSON.parse(clipboardText); // Assuming data is in JSON format
 
-
-const importFromJSON = (json, setNodes, setEdges) => {
-    try {
-      const flowData = JSON.parse(json); 
-      if (flowData.nodes && flowData.edges) {
-        setNodes(flowData.nodes); 
-        setEdges(flowData.edges); 
-      } else {
-        alert('Invalid JSON structure!'); 
-      }
-    } catch (error) {
-      alert('Error parsing JSON: ' + error.message); 
+    if (Array.isArray(clipboardData.nodes)) {
+      // Update nodes
+      const newNodes = clipboardData.nodes.map((node) => ({
+        ...node,
+        id: `${node.id}`, 
+        position: {
+          x: node.position.x + 50,
+          y: node.position.y + 50, 
+        },
+      }));
+      setNodes((prevNodes) => [...prevNodes, ...newNodes]);
+    } else {
+      console.error("Invalid nodes format in clipboard data.");
     }
-  };
-  
-  export default importFromJSON;
-  
+
+    if (Array.isArray(clipboardData.edges)) {
+      // Update edges
+      const newEdges = clipboardData.edges.map((edge) => ({
+        ...edge,
+        id: `${edge.id}`,
+      }));
+      setEdges((prevEdges) => [...prevEdges, ...newEdges]);
+    } else {
+      console.error("Invalid edges format in clipboard data.");
+    }
+  } catch (error) {
+    console.error("Failed to paste clipboard data:", error);
+  }
+};
+
+export default importFromJSON;

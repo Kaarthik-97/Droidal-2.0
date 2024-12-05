@@ -1,16 +1,26 @@
-import exportAsJSON from "../Sections/JsonExport"
-import {
-    ControlButton,
-    Controls,
-  } from '@xyflow/react';
+import handleExport from '../Sections/JsonExportBackend';
 import "./css/TopButton.css"
 import importFromJSON from "../Sections/JsonImport";
 
 
 
-const copyToClipboard = (nodes, setNodes , setEdges, edges) => {
-    const data = { nodes, edges }; // Combine nodes and edges into one object
-    const jsonString = JSON.stringify(data, null, 2); // Serialize with formatting
+
+
+const exportToFile = (nodes, edges) =>{
+    let jsonOutput = handleExport(nodes,edges)
+    const blob = new Blob([jsonOutput], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'reactflow-ordered-export.json';
+    link.click();
+    URL.revokeObjectURL(url);
+}
+
+
+const copyToClipboard = (nodes, edges) => {
+    const data = { nodes, edges }; 
+    const jsonString = JSON.stringify(data, null, 2); 
     navigator.clipboard
       .writeText(jsonString)
       .then(() => {
@@ -32,27 +42,27 @@ const copyToClipboard = (nodes, setNodes , setEdges, edges) => {
   };
 
 
-const TopButton =(nodes,setNodes,setEdges, edges)=>{
-return(
+
+const TopButton = ({ nodes, edges, setNodes, setEdges }) => {
+  return (
     <>
-        <img
-      className="TopNavButtonCC"
-      onClick={() => copyToClipboard(nodes, edges)}
-      src="/copy (1).png"
-    />
-         <img
-      className="TopNavButtonEP"
-      onClick={() => exportAsJSON(nodes, edges)}
-      src="/download.png"
-    />
-         <img
-      className="TopNavButtonPT"
-      onClick={() => handlePaste(setNodes, setEdges)}
-      src="/icons8-paste-50.png"
-    />
-
+      <img
+        className="TopNavButtonCC"
+        onClick={() => copyToClipboard(nodes, edges)}
+        src="/copy (1).png"
+      />
+      <img
+        className="TopNavButtonEP"
+        onClick={() => exportToFile(nodes, edges)}
+        src="/download.png"
+      />
+      <img
+        className="TopNavButtonPT"
+        onClick={()=>handlePaste({setNodes, setEdges})}  // Now, this should work as expected
+        src="/icons8-paste-50.png"
+      />
     </>
-)
-}
+  );
+};
 
-export default TopButton
+export default TopButton;

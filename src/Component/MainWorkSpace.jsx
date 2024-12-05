@@ -25,6 +25,7 @@ const MainWorkSpace = () => {
   const [selectedNode, setSelectedNode] = useState(null);
   const [selectedEdge, setSelectedEdge] = useState(null);
   const workspaceRef = useRef(null); 
+  //  const [center, setCenter] = useState({ x: 0, y: 0 });
 
   const onConnect = useCallback(
     (params) =>
@@ -34,6 +35,21 @@ const MainWorkSpace = () => {
     []
   );
 
+  const getBottomMostNode = () => {
+    const bottomMostNode = nodes.reduce((prev, current) => {
+      return (prev.position.y > current.position.y) ? prev : current;
+    });
+    return bottomMostNode;
+  };
+
+
+  const centerOfViewport = {
+    x: window.innerWidth / 2,
+    y: window.innerHeight / 2,
+  };
+
+
+
 
   const nodeTypes = {
     bidirectional: BiDirectionalNode,
@@ -41,22 +57,34 @@ const MainWorkSpace = () => {
   };
  
   const addNode = (nodeProps) => {
+    
+    if (nodes.length != 0){
+      let bottomMostNode = getBottomMostNode();
     setNodes((nds) => [
       ...nds,
       {
         id: (nds.length + 1).toString(), 
-        position: { x: Math.random() * 250, y: Math.random() * 250 },
+        position: { x:bottomMostNode.position.x, y:bottomMostNode.position.y+60},
         ...nodeProps,
       },
     ]);
-  };
-
+  }
+  else{
+    setNodes((nds) => [
+      ...nds,
+      {
+        id: (nds.length + 1).toString(), 
+        position: { x:centerOfViewport.x, y: centerOfViewport.y},
+        ...nodeProps,
+      },
+    ]);
+  }
+}
 
 
   const onEdgeClick = (event, edge) => {
     setSelectedEdge(edge); 
   };
-
 
 
   const onNodeDoubleClick = (event, node) => {
@@ -123,7 +151,20 @@ const MainWorkSpace = () => {
   };
 
 
+  const updateNodeProperties = (nodeId, key, value) => {
+    if (selectedNode) {
+      const updatedNode = { ...selectedNode };
+      updatedNode.data[key] = value;
+      setSelectedNode(updatedNode);
+    }
+  };
 
+
+  // const test = () => {
+  //   console.log("sdgsdgsdg");
+  //   // Your logic to handle paste
+  // };
+  
   return (
     <>
     <div style={{ width: '89vw', height: '100vh' }}>
@@ -160,10 +201,10 @@ const MainWorkSpace = () => {
         {selectedNode ? (
           <>
           
-        <SideBarProperties selectedNode = {selectedNode}/>
+        <SideBarProperties selectedNode = {selectedNode} updateNodeProperties={updateNodeProperties}/>
         </>): 
         (
-        <><TopButton nodes = {nodes} setNodes = {setNodes} setEdges = {setEdges} seedges = {edges}/>
+        <><TopButton nodes={nodes} edges={edges} setNodes = {setNodes} setEdges = {setEdges} />
         <SideBarNew onAddNode = {addNode}/>
         </>)
 }

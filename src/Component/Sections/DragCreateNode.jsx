@@ -28,7 +28,7 @@ const nodeOrigin = [0.5, 0];
 const AddNodeOnEdgeDrop = () => {
   const reactFlowWrapper = useRef(null);
  
-  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+  const [nodes, setNodes, onNodesChange] = useNodesState([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
   const { screenToFlowPosition } = useReactFlow();
   const onConnect = useCallback(
