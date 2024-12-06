@@ -2,6 +2,7 @@ import buttonContent from "./ButtonContent";
 import buttonValue from "./ButtonValues";
 
 const buttonProperties = {
+  Webactivities:{
     addNode1: {
       label: 'For',
       nodeProps: {
@@ -34,7 +35,9 @@ const buttonProperties = {
         style: {backgroundColor: 'lightcoral'},
         values:{value :"while"},
       },
-    },    
+    }, 
+  },
+    DesktopActivities:{
     addNode5: {
       
       label: 'Start',
@@ -78,6 +81,7 @@ const buttonProperties = {
         style: {backgroundColor: 'lightblue'},
       },
     },
+  },
 
   };
 

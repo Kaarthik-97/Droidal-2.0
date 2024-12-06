@@ -39,10 +39,11 @@
     justify-content: center;
     align-items: center;
     text-align: center;
+    border-radius: 8px;
     /* padding: 10px; */
     font-size: 12px;
     flex-direction: column;
-    border: var(--xy-node-border-default);
+    /* border: var(--xy-node-border-default); */
     color: var(--xy-node-color, var(--xy-node-color-default));
 }
  

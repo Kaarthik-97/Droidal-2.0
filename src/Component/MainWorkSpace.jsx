@@ -154,6 +154,51 @@ const MainWorkSpace = () => {
   };
 
 
+  const onDragOver = useCallback((event) => {
+    event.preventDefault();
+    event.dataTransfer.dropEffect = 'move';
+  }, []);
+
+  const onDrop = useCallback(
+    (event) => {
+      event.preventDefault();
+
+      const reactFlowBounds = event.target.getBoundingClientRect();
+      const nodeProps = JSON.parse(
+        event.dataTransfer.getData('application/reactflow')
+      );
+
+      const position = {
+        x: event.clientX - reactFlowBounds.left,
+        y: event.clientY - reactFlowBounds.top,
+      };
+
+      // const newNode = {
+      //   id: `${nodeProps.data.label}-${+new Date()}`, // Unique ID
+      //   position,
+      //   data: nodeProps.data,
+      //   type: nodeProps.type || 'default',
+      //   style: nodeProps.style,
+      // };
+
+      // setNodes((nds) => nds.concat(newNode));
+
+      setNodes((nds) => [
+        ...nds,
+        {
+          id: (nds.length + 1).toString(), 
+          position,
+          ...nodeProps,
+        },
+      ])
+    },
+    [setNodes]
+  );
+
+
+
+
+
   const updateNodeProperties =  (key, value) => {
     if (selectedNode) {
       const updatedNode = { ...selectedNode };
@@ -168,7 +213,8 @@ const MainWorkSpace = () => {
   
   return (
     <>
-    <div style={workspacesize}>
+    <div style={workspacesize}onDrop={onDrop}
+      onDragOver={onDragOver}>
       <ReactFlow
         nodes={nodes}
         edges={edges}
