@@ -208,6 +208,17 @@ const MainWorkSpace = () => {
     }
   };
 
+
+
+  function searchresults(searchVal) {
+        // if (searchVal === "") { setProducts(productList); return; }
+        // const filterBySearch = productList.filter((item) => {
+        //     if (item.toLowerCase()
+        //         .includes(searchVal.toLowerCase())) { return item; }
+        // })
+        // setProducts(filterBySearch);
+    }
+
 const changesize=()=>{
   if (expand == true){
   SetExpand(false)
@@ -275,6 +286,7 @@ const changesize=()=>{
           type="text"
           className="search-box"
           placeholder="Search Nodes"
+          onChange={e=> searchresults(e.target.value)}
           />
   </div>
 </div>
