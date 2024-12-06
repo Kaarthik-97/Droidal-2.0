@@ -2,14 +2,13 @@ import React, { useState, useEffect } from 'react';
 import SelectInput from '../Buttons/SelectInput';
 import RadioInput from '../Buttons/RadioInput';
 import TextInput from '../Buttons/TextInput';
+import "../Buttons/css/SideBarProp.css"
 
 const SideBarProperties = ({ selectedNode, updateNodeProperties }) => {
-  // State to store the current properties of the selected node
   const [nodeData, setNodeData] = useState(selectedNode ? selectedNode.data : {});
   const [nodevalueData, setNodeValueData] = useState(selectedNode ? selectedNode.values : {});
 
 
-  // Update local state if selectedNode changes
   useEffect(() => {
     if (selectedNode && selectedNode) {
       setNodeData(selectedNode.data);

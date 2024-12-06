@@ -8,6 +8,7 @@ import importFromJSON from "../Sections/JsonImport";
 
 const exportToFile = (nodes, edges) =>{
     let jsonOutput = handleExport(nodes,edges)
+    if (jsonOutput != null){
     const blob = new Blob([jsonOutput], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
@@ -15,6 +16,7 @@ const exportToFile = (nodes, edges) =>{
     link.download = 'reactflow-ordered-export.json';
     link.click();
     URL.revokeObjectURL(url);
+    }
 }
 
 

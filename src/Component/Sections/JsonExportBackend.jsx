@@ -1,12 +1,19 @@
 const handleExport = (nodes, edges) => {
 
-    const startNode = nodes.find((node) => node.data.label === 'start'); // Replace with your criteria
-  
-    if (!startNode) {
+    const startNode = nodes.filter((node) => node.data.label === 'start'); // Replace with your criteria
+
+    if (startNode.length > 1) {
+      console.log("There are multiple 'start' nodes.");
+       alert(`
+    🚨 Error: Multiple "start" nodes detected!`)
+    return null
+  }
+  else if (!startNode) {
       console.error('Start node not found!');
-      return;
+      return null;
     }
   
+    else{
     const visited = new Set();
     const result = [];
   
@@ -41,6 +48,7 @@ const handleExport = (nodes, edges) => {
     const jsonOutput = JSON.stringify(result, null, 2);
     return jsonOutput
   };
+}
 
 export default handleExport
   

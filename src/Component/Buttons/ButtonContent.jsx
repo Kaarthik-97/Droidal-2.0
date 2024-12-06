@@ -1,12 +1,13 @@
 const buttonContent = {
+ //Update ButtonValues also when updating this 
+ 
+ //ButtonValue Provides the data for backend json
 
     OpenBrowser:{
-        "browsertype": {"options":["Chrome","Edge"],"type":"select", "value":""},
-        "Value": {"value":""},
-        "fullwidth": {"value":""},
-        "delay": {"value":""},
-        "comment": {"value":""},
-        "breakpoint": {"value":""}
+        "Browser Type": {"options":["Chrome","Edge"],"type":"select", "value":""},
+        "Enter URL": {"value":""},
+        "Browser Width": {"options":["Default","Full Width"],"type":"select", "value":""},
+        "Delay (in Seconds)": {"value":""},
     },
     ElementWait:{
         "driver": "driver",
@@ -15,8 +16,6 @@ const buttonContent = {
         "timeout": "50",
         "outputvariable": "pageload",
         "content_desc": "Description",
-        "comment": "",
-        "breakpoint": "False"
     },
     Click:{
         "Selectortype": "By.XPATH",
@@ -25,8 +24,6 @@ const buttonContent = {
         "delay": "1",
         "driver": "driver",
         "content_desc": "practice staff",
-        "comment": "",
-        "breakpoint": "False"
     },
     TypeInto:{
         "Selectortype": "By.XPATH",
@@ -36,8 +33,6 @@ const buttonContent = {
         "delay": "1",
         "driver": "driver",
         "content_desc": "username",
-        "comment": "",
-        "breakpoint": "False"
     }
 }
 

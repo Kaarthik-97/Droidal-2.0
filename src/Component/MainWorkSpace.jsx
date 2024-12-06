@@ -1,4 +1,5 @@
 import React, { useRef,useCallback,useState,useEffect } from 'react';
+import Button from 'react-bootstrap/Button';
 import {
   ReactFlow,
   MiniMap,
@@ -18,6 +19,7 @@ import TopButton from './Buttons/TopButton';
 import importFromJSON from './Sections/JsonImport';
 import BiDirectionalNode from './Sections/BiDirectionalNode.tsx';
 import TriDirectionalNode from './Sections/TriDirectionalNode.tsx';
+import NormalNode from './Sections/NormalNode.tsx';
  
 const MainWorkSpace = () => {
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
@@ -25,6 +27,7 @@ const MainWorkSpace = () => {
   const [selectedNode, setSelectedNode] = useState(null);
   const [selectedEdge, setSelectedEdge] = useState(null);
   const workspaceRef = useRef(null); 
+  const [workspacesize, setWorkSpaceSize] = useState({ width: '89vw', height: '100vh' })
   //  const [center, setCenter] = useState({ x: 0, y: 0 });
 
   const onConnect = useCallback(
@@ -54,6 +57,7 @@ const MainWorkSpace = () => {
   const nodeTypes = {
     bidirectional: BiDirectionalNode,
     tridirectional:TriDirectionalNode,
+    monodir:NormalNode,
   };
  
   const addNode = (nodeProps) => {
@@ -83,6 +87,7 @@ const MainWorkSpace = () => {
 
   const onEdgeClick = (event, edge) => {
     setSelectedEdge(edge);
+    setSelectedNode(null)
   };
 
 
@@ -163,7 +168,7 @@ const MainWorkSpace = () => {
   
   return (
     <>
-    <div style={{ width: '89vw', height: '100vh' }}>
+    <div style={workspacesize}>
       <ReactFlow
         nodes={nodes}
         edges={edges}
@@ -198,6 +203,8 @@ const MainWorkSpace = () => {
           <>
           
         <SideBarProperties selectedNode = {selectedNode} updateNodeProperties={updateNodeProperties}/>
+        <div><Button variant="primary">Save</Button></div>
+        {/* <div><Button variant="primary">Primary</Button></div> */}
         </>): 
         (
         <><TopButton nodes={nodes} edges={edges} setNodes = {setNodes} setEdges = {setEdges} />
