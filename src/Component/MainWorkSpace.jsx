@@ -20,6 +20,7 @@ import importFromJSON from './Sections/JsonImport';
 import BiDirectionalNode from './Sections/BiDirectionalNode.tsx';
 import TriDirectionalNode from './Sections/TriDirectionalNode.tsx';
 import NormalNode from './Sections/NormalNode.tsx';
+import "./Sections/css/MainWorkSpace.css"
  
 const MainWorkSpace = () => {
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
@@ -27,7 +28,10 @@ const MainWorkSpace = () => {
   const [selectedNode, setSelectedNode] = useState(null);
   const [selectedEdge, setSelectedEdge] = useState(null);
   const workspaceRef = useRef(null); 
-  const [workspacesize, setWorkSpaceSize] = useState({ width: '89vw', height: '100vh' })
+  const [workspacesize, setWorkSpaceSize] = useState({ width: '79vw', height: '100vh' })
+  const[sideBarsize, setSideBarSize] = useState({width:'20vw',height:'100vh'})
+  const[expand , SetExpand] = useState(true)
+  const[findarea,setFindArea] = useState(false)
   //  const [center, setCenter] = useState({ x: 0, y: 0 });
 
   const onConnect = useCallback(
@@ -97,6 +101,7 @@ const MainWorkSpace = () => {
 
   const onPaneClick = () =>{
     setSelectedNode(null)
+    setSelectedEdge(null)
   }
 
   useEffect(() => {
@@ -153,6 +158,10 @@ const MainWorkSpace = () => {
     setSelectedNode(null); 
   };
 
+  const clearAll = () => {
+    setNodes([]);
+    setEdges([]);
+  };
 
   const onDragOver = useCallback((event) => {
     event.preventDefault();
@@ -172,16 +181,6 @@ const MainWorkSpace = () => {
         x: event.clientX - reactFlowBounds.left,
         y: event.clientY - reactFlowBounds.top,
       };
-
-      // const newNode = {
-      //   id: `${nodeProps.data.label}-${+new Date()}`, // Unique ID
-      //   position,
-      //   data: nodeProps.data,
-      //   type: nodeProps.type || 'default',
-      //   style: nodeProps.style,
-      // };
-
-      // setNodes((nds) => nds.concat(newNode));
 
       setNodes((nds) => [
         ...nds,
@@ -209,7 +208,18 @@ const MainWorkSpace = () => {
     }
   };
 
-
+const changesize=()=>{
+  if (expand == true){
+  SetExpand(false)
+  setWorkSpaceSize({ width: '89vw', height: '100vh' })
+  setSideBarSize({width:'10vw',height:'100vh'})
+  }
+  else{
+    SetExpand(true)
+    setWorkSpaceSize({ width: '79vw', height: '100vh' })
+    setSideBarSize({width:'19vw',height:'100vh'})
+  }
+}
   
   return (
     <>
@@ -234,28 +244,44 @@ const MainWorkSpace = () => {
         <Background variant="dots" gap={12} size={1} />
       </ReactFlow>
     </div>
+
     
     <div
         className="Properties"
         style={{
+          ...sideBarsize,
           flex: 1,
           padding: '10px',
           borderLeft: '1px solid #ccc',
           overflow: 'auto', 
+          position: "fixed",
+          right: 0,
+          top: 0,
         }}
       >
         
         {selectedNode ? (
           <>
-          
         <SideBarProperties selectedNode = {selectedNode} updateNodeProperties={updateNodeProperties}/>
         <div><Button variant="primary">Save</Button></div>
         {/* <div><Button variant="primary">Primary</Button></div> */}
         </>): 
         (
-        <><TopButton nodes={nodes} edges={edges} setNodes = {setNodes} setEdges = {setEdges} />
+          <>
+        <div className='TopBarSec'><img src="move.png" style ={{width: "20px"}} onClick={changesize}></img><TopButton nodes={nodes} edges={edges} setNodes = {setNodes} setEdges = {setEdges} /></div>
+        <div className="SearchArea">
+        <div className="search-container">
+         <input
+          type="text"
+          className="search-box"
+          placeholder="Search Nodes"
+          />
+  </div>
+</div>
+
         <SideBarNew onAddNode = {addNode}/>
-        </>)
+        </>
+        )
 }
 </div>
 </>

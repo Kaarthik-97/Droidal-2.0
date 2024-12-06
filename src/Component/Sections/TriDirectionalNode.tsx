@@ -5,12 +5,13 @@ import {
   Handle,
   Position,
 } from '@xyflow/react';
+import './css/SideBarNew.css';
 
  
  
 const TriDirectionalNode = ({ data }: NodeProps<BuiltInNode>) => {
   return (
-    <div className='BiDirNode' style = {{
+    <div className='TriDirNode' style = {{
         fontSize: '14px',
         padding: '20px 40px', 
         cursor: 'pointer', }}>

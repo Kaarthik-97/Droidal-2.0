@@ -35,6 +35,8 @@ const copyToClipboard = (nodes, edges) => {
 
 
   const handlePaste = async (setNodes, setEdges) => {
+
+    
     try {
       const clipboardText = await navigator.clipboard.readText();
       importFromJSON(clipboardText, setNodes, setEdges);
@@ -47,7 +49,7 @@ const copyToClipboard = (nodes, edges) => {
 
 const TopButton = ({ nodes, edges, setNodes, setEdges }) => {
   return (
-    <>
+    <div className='TopButtons'>
       <img
         className="TopNavButtonCC"
         onClick={() => copyToClipboard(nodes, edges)}
@@ -63,7 +65,7 @@ const TopButton = ({ nodes, edges, setNodes, setEdges }) => {
         onClick={()=>handlePaste({setNodes, setEdges})}  // Now, this should work as expected
         src="/icons8-paste-50.png"
       />
-    </>
+    </div>
   );
 };
 

@@ -8,7 +8,9 @@ const handleExport = (nodes, edges) => {
     🚨 Error: Multiple "start" nodes detected!`)
     return null
   }
-  else if (!startNode) {
+  else if (startNode.length<1) {
+    alert(`
+      No start node found`)
       console.error('Start node not found!');
       return null;
     }
@@ -43,7 +45,7 @@ const handleExport = (nodes, edges) => {
     };
   
     // Start traversal from the start node
-    traverse(startNode.id);
+    traverse(startNode[0].id);
   
     const jsonOutput = JSON.stringify(result, null, 2);
     return jsonOutput

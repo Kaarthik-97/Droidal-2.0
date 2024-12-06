@@ -32,7 +32,8 @@ const SideBarNew = ({ onAddNode }) => {
               className="section-title"
               onClick={() => toggleSection(sectionKey)}
             >
-              {sectionKey} <span>{isExpanded ? '▲' : '▼'}</span>
+              {sectionKey}
+              {/* <span>{isExpanded ? '▲' : '▼'}</span> */}
             </div>
 
             {/* Buttons */}

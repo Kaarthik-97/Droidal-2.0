@@ -1,5 +1,10 @@
 const importFromJSON = (clipboardText,{setNodes, setEdges}) => {
   try {
+    const clearAll = () => {
+      setNodes([]);
+      setEdges([]);
+    };
+    clearAll()
     const clipboardData = JSON.parse(clipboardText); // Assuming data is in JSON format
 
     if (Array.isArray(clipboardData.nodes)) {

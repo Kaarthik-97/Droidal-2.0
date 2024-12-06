@@ -1,12 +1,10 @@
 const buttonValue = {
 
     OpenBrowser:{
-        "browsertype":"",
-        "Value":"",
-        "fullwidth":"",
-        "delay":"",
-        "comment":"",
-        "breakpoint":"",
+        "Browser Type":"",
+        "Enter URL": "",
+        "Browser Width":"",
+        "Delay (in Seconds)": "",
     },
     ElementWait:{
         "driver":"",
