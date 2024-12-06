@@ -1,12 +1,12 @@
 const buttonContent = {
 
     OpenBrowser:{
-        "browsertype": {"value":"Chrome()","type":"select"},
-        "Value": "https://metrolinadermatology.ema.md/ema/Login.action",
-        "fullwidth": "full-width",
-        "delay": "1",
-        "comment": "",
-        "breakpoint": "False"
+        "browsertype": {"options":["Chrome","Edge"],"type":"select", "value":""},
+        "Value": {"value":""},
+        "fullwidth": {"value":""},
+        "delay": {"value":""},
+        "comment": {"value":""},
+        "breakpoint": {"value":""}
     },
     ElementWait:{
         "driver": "driver",

@@ -1,10 +1,11 @@
 import buttonContent from "./ButtonContent";
+import buttonValue from "./ButtonValues";
 
 const buttonProperties = {
     addNode1: {
       label: 'For',
       nodeProps: {
-        data: { label: 'For' },
+        data: { label: 'For'},
         style: { backgroundColor: 'lightblue' },
       },
     },
@@ -29,14 +30,16 @@ const buttonProperties = {
         data: { label: 'While' },
         type: 'bidirectional',
         style: {backgroundColor: 'lightcoral',border: '1px solid black',borderRadius: '8px'},
+        values:{value :"while"},
       },
     },    
     addNode5: {
       
       label: 'Start',
       nodeProps: {
-        data: {label: 'start',type:"start" },
+        data: {label: 'start' },
         style: {backgroundColor: 'lightgreen',border: '1px solid black',borderRadius: '8px'},
+        values:{value:"start"}
       },
     },
     addNode6: {
@@ -44,6 +47,7 @@ const buttonProperties = {
       nodeProps: {
         data: { label: 'Open Browser',...buttonContent.OpenBrowser },
         style: {backgroundColor: 'lightblue',border: '1px solid black',borderRadius: '8px'},
+        values:{ ...buttonValue.OpenBrowser },
       },
     },
     addNode7: {

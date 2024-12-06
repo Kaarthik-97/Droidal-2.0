@@ -6,14 +6,14 @@ import TextInput from '../Buttons/TextInput';
 const SideBarProperties = ({ selectedNode, updateNodeProperties }) => {
   // State to store the current properties of the selected node
   const [nodeData, setNodeData] = useState(selectedNode ? selectedNode.data : {});
-
-
+  const [nodevalueData, setNodeValueData] = useState(selectedNode ? selectedNode.values : {});
 
 
   // Update local state if selectedNode changes
   useEffect(() => {
     if (selectedNode && selectedNode) {
       setNodeData(selectedNode.data);
+      setNodeValueData(selectedNode.values)
     }
   }, [selectedNode]);
 
@@ -21,40 +21,15 @@ const SideBarProperties = ({ selectedNode, updateNodeProperties }) => {
 
 
 
-  // // Handle input changes to update the local state
-  // const handleInputChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setNodeData((prevData) => ({
-  //     ...prevData,
-  //     [name]: value,
-  //   }));
 
-  //   // Optionally, if you want to push updates back to parent or other parts of your app
-  //   if (updateNodeProperties) {
-  //     updateNodeProperties(selectedNode.id, name, value);
-  //   }
-  // };
-
-
- 
-
-  const handleInputChange = (e, key) => {
-    const { value } = e.target;
-    
-    setNodeData((prevData) => ({
-      ...prevData,
-      [key]: {
-        ...prevData[key],
-        selectedValue: value,
-      }
-    }));
+  const handleSelectChange = (e, key) => {
+    const updatedNode = { ...selectedNode };
+    const value = e.target.value;
+    updateNodeProperties(key, value)
+  }
   
-    // Optionally, update the parent component
-    if (updateNodeProperties) {
-      updateNodeProperties(selectedNode.id, key, value);
-    }
-  };
-  
+
+
 
 
 
@@ -72,6 +47,7 @@ const SideBarProperties = ({ selectedNode, updateNodeProperties }) => {
     <div className="NodeProperties">
       <div className="NodeBody">
         {Object.keys(nodeData).map((key) => {
+          if (key != "label"){
           const field = nodeData[key];
 
           return (
@@ -84,7 +60,7 @@ const SideBarProperties = ({ selectedNode, updateNodeProperties }) => {
                 <select
                   name={key}
                   value={field.value}
-                  onChange={(e) => handleInputChange(e, key)}
+                  onChange={(e) => handleSelectChange(e, key)}
                 >
                   {field?.options?.map((option, idx) => (
                     <option key={idx} value={option}>
@@ -100,8 +76,8 @@ const SideBarProperties = ({ selectedNode, updateNodeProperties }) => {
                         type="radio"
                         name={key}
                         value={option}
-                        checked={field.selectedValue === option}
-                        onChange={(e) => handleInputChange(e, key)}
+                        checked={field.value === option}
+                        onChange={(e) => handleSelectChange(e, key)}
                       />
                       {option}
                     </label>
@@ -112,13 +88,13 @@ const SideBarProperties = ({ selectedNode, updateNodeProperties }) => {
                 <input
                   type="text"
                   name={key}
-                  value={field.selectedValue || ''}
-                  onChange={(e) => handleInputChange(e, key)}
+                  value={field.value || ''}
+                  onChange={(e) => handleSelectChange(e, key)}
                 />
               )}
             </div>
           );
-        })}
+}})}
       </div>
     </div>
   );

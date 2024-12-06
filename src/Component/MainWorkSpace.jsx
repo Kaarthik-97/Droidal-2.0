@@ -149,11 +149,13 @@ const MainWorkSpace = () => {
   };
 
 
-  const updateNodeProperties = (nodeId, key, value) => {
+  const updateNodeProperties =  (key, value) => {
     if (selectedNode) {
       const updatedNode = { ...selectedNode };
-      updatedNode.data[key] = value;
+      updatedNode.data[key].value = value;
       setSelectedNode(updatedNode);
+
+      updatedNode.values[key] = value;
     }
   };
 

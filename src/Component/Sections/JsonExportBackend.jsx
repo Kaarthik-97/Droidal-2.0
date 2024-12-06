@@ -1,6 +1,6 @@
 const handleExport = (nodes, edges) => {
 
-    const startNode = nodes.find((node) => node.data.type === 'start'); // Replace with your criteria
+    const startNode = nodes.find((node) => node.data.label === 'start'); // Replace with your criteria
   
     if (!startNode) {
       console.error('Start node not found!');
@@ -18,13 +18,14 @@ const handleExport = (nodes, edges) => {
       const currentNode = nodes.find((node) => node.id === nodeId);
       if (currentNode) {
         // Add node data to the result
-        const filteredData = Object.keys(currentNode.data || {}).reduce((acc, key) => {
-          if (currentNode.data[key] !== undefined && currentNode.data[key] !== null) {
-            acc[key] = currentNode.data[key];
+        const filteredData = Object.keys(currentNode.values || {}).reduce((acc, key) => {
+          if (currentNode.values[key] !== undefined && currentNode.values[key] !== null) {
+            acc[key] = currentNode.values[key];
           }
           return acc;
         }, {});
-        result.push(filteredData);
+        const label = currentNode.data.label ? currentNode.data.label : "";
+        result.push({[label]:filteredData});
   
         // Find the edges originating from the current node
         const connectedEdges = edges.filter((edge) => edge.source === nodeId);
