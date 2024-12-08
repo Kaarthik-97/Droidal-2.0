@@ -290,7 +290,7 @@ const changesize=()=>{
         {selectedNode ? (
           <>
         <SideBarProperties selectedNode = {selectedNode} updateNodeProperties={updateNodeProperties}/>
-        <div><Button variant="primary">Save</Button></div>
+        <div><Button variant="primary" onClick={onPaneClick}>Save</Button></div>
         {/* <div><Button variant="primary">Primary</Button></div> */}
         </>): 
         (
@@ -310,8 +310,8 @@ const changesize=()=>{
 {/* onAddNode = {addNode} */}
         <SideBarNew />
         <div className='Bottom-Bar'>
-        <Button variant="primary" onClick={clearAll}>Save</Button>
-        <Button variant="primary" onClick={clearAll}>Clear All</Button></div>
+        <Button className = "SaveButtonHome" variant="primary" >Save</Button>
+        <Button className = "ClearAllHome" variant="primary" onClick={clearAll}>Clear All</Button></div>
         </>
         )
 }

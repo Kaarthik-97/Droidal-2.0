@@ -56,10 +56,25 @@
   }
   
   .Bottom-Bar button {
-    border: 1px solid #a10000;
+    
     border-radius: 8px;
     padding: 10px;
     max-width: 30vw;
-    background-color: hsl(0, 83%, 34%);
   }
   
+  .SaveButtonHome{
+    border: 1px solid #0d8a22;
+    background-color: hsl(135, 79%, 33%);
+  }
+  .ClearAllHome{
+    border: 1px solid #a10000;
+    background-color: hsl(0, 99%, 33%);
+  }
+
+  .SaveButtonHome:hover{
+    background-color: hsl(135, 80%, 28%);
+  }
+  .ClearAllHome:hover{
+    border: 1px solid #4e0202;
+    background-color: hsl(0, 100%, 28%);
+  }
